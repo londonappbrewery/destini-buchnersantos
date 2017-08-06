@@ -32,7 +32,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var storyTextView: UILabel!
     
     // TODO Step 5: Initialise instance variables here
-    
+    var storyIndex : Int = 1
+
     
     
     
@@ -42,6 +43,12 @@ class ViewController: UIViewController {
         
         // TODO Step 3: Set the text for the storyTextView, topButton, bottomButton, and to T1_Story, T1_Ans1, and T1_Ans2
         
+        // Set the storyTextView to display story1 by updating its text property.
+        
+        storyTextView.text = story1
+        topButton.setTitle(answer1a, for: .normal)
+        bottomButton.setTitle(answer1b, for: .normal)
+        
     }
 
     
@@ -49,12 +56,71 @@ class ViewController: UIViewController {
     @IBAction func buttonPressed(_ sender: UIButton) {
     
         // TODO Step 4: Write an IF-Statement to update the views
+        if sender.tag == 1 {
+            print("story: \(storyIndex), button: top")
+            if (storyIndex == 1 || storyIndex == 2){
+                storyIndex = 3
+                storyTextView.text = story3
+                topButton.setTitle(answer3a, for: .normal)
+                bottomButton.setTitle(answer3b, for: .normal)
+                print("new story: \(storyIndex)")
+
+            }
+            else if (storyIndex == 3){
+                storyIndex = 6
+                storyTextView.text = story6
+                topButton.setTitle("Start Over", for: .normal)
+                bottomButton.isHidden = true
+                print("new story: \(storyIndex)")
+            }
+            else if (storyIndex >= 4){
+                startOver()
+            }
+
+           
+            
+        }
+        else if sender.tag == 2 {
+            print("question story: \(storyIndex), button: bottom")
+
+            if (storyIndex == 1){
+                storyIndex = 2
+                storyTextView.text = story2
+                topButton.setTitle(answer2a, for: .normal)
+                bottomButton.setTitle(answer2b, for: .normal)
+                print("new story: \(storyIndex)")
+
+            }
+            else if (storyIndex == 2){
+                storyIndex = 4
+                storyTextView.text = story4
+                topButton.setTitle("Start Over", for: .normal)
+                bottomButton.isHidden = true
+                print("new story: \(storyIndex)")
+
+            }
+            else if (storyIndex == 3){
+                storyIndex = 5
+                storyTextView.text = story5
+                topButton.setTitle("Start Over", for: .normal)
+                bottomButton.isHidden = true
+                print("new story: \(storyIndex)")
+ 
+            }
+            
+        }
                 
         // TODO Step 6: Modify the IF-Statement to complete the story
-        
     
     }
     
+    func startOver(){
+        storyIndex = 1
+        storyTextView.text = story1
+        topButton.setTitle(answer1a, for: .normal)
+        bottomButton.isHidden = false
+        bottomButton.setTitle(answer1b, for: .normal)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
